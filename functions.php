@@ -44,3 +44,17 @@ function education_register_nav_menus(){
     ));
 }
 add_action('init', 'education_register_nav_menus');
+
+/**
+*
+* Modify post excerpt length
+*
+**/
+function modify_post_excerpt_length($length){
+    if(get_post_type() == 'post' && is_front_page()){
+        return 10;
+    }else{
+        return $length;
+    }
+}
+add_filter('excerpt_length', 'modify_post_excerpt_length');

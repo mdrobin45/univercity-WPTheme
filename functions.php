@@ -52,9 +52,63 @@ add_action('init', 'education_register_nav_menus');
 **/
 function modify_post_excerpt_length($length){
     if(get_post_type() == 'post' && is_front_page()){
-        return 10;
+        return 20;
     }else{
         return $length;
     }
 }
 add_filter('excerpt_length', 'modify_post_excerpt_length');
+
+
+/**
+*
+* Modify event excerpt length
+*
+**/
+function modify_event_excerpt_length($length){
+    if(is_front_page() && get_post_type() == 'event'){
+        return 20;
+    }else{
+        return $length;
+    }
+}
+add_filter('excerpt_length', 'modify_event_excerpt_length');
+
+
+/**
+*
+* Events post type
+*
+**/
+function custom_post_types(){
+    $labels = array(
+        'name' => __('Events','textdomain'),
+        'singular_name' => __('Event','textdomain'),
+        'menu_name' => __('Events','textdomain'),
+        'all_items' => __('All Events','textdomain'),
+        'add_new' => __('Add new','textdomain'),
+        'add_new_item' => __('Add new event','textdomain'),
+        'edit_item' => __('Edit event','textdomain'),
+        'view_item' => __('View Event','textdomain'),
+        'search_items' => __('Search Events','textdomain'),
+        'not_found' => __('Events not found','textdomain'),
+        'not_found_in_trash' => __('Events not found','textdomain')
+    );
+
+    $supports = array(
+        'title', 
+        'editor',
+        'thumbnail'
+    );
+
+    register_post_type('event',
+        array(
+            'labels' => $labels,
+            'public' => true,
+            'has_archive' => true,
+            'menu_position'=> 4,
+            'supports' => $supports
+        )
+    );
+}
+add_action('init', 'custom_post_types');

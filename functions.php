@@ -100,14 +100,19 @@ function custom_post_types(){
         'editor',
         'thumbnail'
     );
+    $rewrite = array(
+        'slug' => 'events'
+    );
 
     register_post_type('event',
         array(
             'labels' => $labels,
             'public' => true,
+            'show_in_rest' => true,
             'has_archive' => true,
             'menu_position'=> 4,
-            'supports' => $supports
+            'supports' => $supports,
+            'rewrite' => $rewrite
         )
     );
 }

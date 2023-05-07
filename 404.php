@@ -1,1 +1,1 @@
-<h1>This is empty page</h1>
+<h1>404 This is empty page</h1>

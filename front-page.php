@@ -26,9 +26,14 @@
                     while($custom_query -> have_posts()){
                         $custom_query -> the_post(); ?>
                         <div class="event-summary">
+                            <?php
+                                $event_date_string = get_field('select_event_date');
+                                $event_date = new DateTime(get_field('select_event_date'));
+                                
+                            ?>
                             <a class="event-summary__date t-center" href="#">
-                            <span class="event-summary__month">Mar</span>
-                            <span class="event-summary__day">25</span>
+                            <span class="event-summary__month"><?php echo $event_date->format('M');?></span>
+                            <span class="event-summary__day"><?php echo $event_date->format('d');?></span>
                             </a>
                             <div class="event-summary__content">
                             <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink(); ?>"><?php the_title();?></a></h5>
@@ -38,7 +43,7 @@
                     <?php }
                 }
             ?>
-          <p class="t-center no-margin"><a href="#" class="btn btn--blue">View All Events</a></p>
+          <p class="t-center no-margin"><a href="<?php echo get_post_type_archive_link('event'); ?>" class="btn btn--blue">View All Events</a></p>
         </div>
       </div>
       <div class="full-width-split__two">

@@ -20,12 +20,12 @@
                             $author_ID = get_the_author_meta('ID');
                             $author_name = get_the_author_meta('display_name', $author_ID);
                             $author_url = get_author_posts_url($author_ID);
-                            $posts_page_ID = get_option('page_for_posts');
+                            $archive_link = get_post_type_archive_link('event');
                             $post_date = get_the_date('d F Y');
                             $post_categories = get_the_category();
 
                             if(is_single()){ ?>
-                                <a class="metabox__blog-home-link" href="<?php the_permalink($posts_page_ID); ?>"><i class="fa fa-home" aria-hidden="true"></i>Blog Home</a> 
+                                <a class="metabox__blog-home-link" href="<?php echo $archive_link; ?>"><i class="fa fa-home" aria-hidden="true"></i>All Events</a> 
                                 <span class="metabox__main">Posted By <a href="<?php echo $author_url; ?>"><?php echo $author_name; ?></a> on <?php echo $post_date; ?> in 
                                 <?php
                                     foreach($post_categories as $category){

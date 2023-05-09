@@ -17,7 +17,10 @@
                 // Custom query for event post type
                 $args = array(
                     'post_type' => 'event',
-                    'posts_per_page' => 2
+                    'posts_per_page' => 3,
+                    'meta_key' => 'select_event_date',
+                    'orderby' => 'meta_value_num',
+                    'order' => 'ASC'
                 );
                 $custom_query = new WP_Query($args);
 
@@ -28,7 +31,8 @@
                         <div class="event-summary">
                             <?php
                                 $event_date_string = get_field('select_event_date');
-                                $event_date = new DateTime(get_field('select_event_date'));
+                                
+                                $event_date = new DateTime($event_date_string);
                                 
                             ?>
                             <a class="event-summary__date t-center" href="#">

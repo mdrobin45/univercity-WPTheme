@@ -15,12 +15,20 @@
           <h2 class="headline headline--small-plus t-center">Upcoming Events</h2>
             <?php
                 // Custom query for event post type
+                $today = date('Ymd');
                 $args = array(
                     'post_type' => 'event',
-                    'posts_per_page' => 3,
+                    'posts_per_page' => 2,
                     'meta_key' => 'select_event_date',
                     'orderby' => 'meta_value_num',
-                    'order' => 'ASC'
+                    'order' => 'ASC',
+                    'meta_query' => array(
+                        array(
+                            'key' => 'select_event_date',
+                            'compare' => '>=',
+                            'value' => $today
+                        )
+                    )
                 );
                 $custom_query = new WP_Query($args);
 

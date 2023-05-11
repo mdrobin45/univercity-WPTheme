@@ -24,14 +24,8 @@
                             $post_categories = get_the_category();
 
                             if(is_single()){ ?>
-                                <a class="metabox__blog-home-link" href="<?php echo get_post_type_archive_link('subject'); ?>"><i class="fa fa-home" aria-hidden="true"></i>All Subject</a> 
-                                <span class="metabox__main">Posted By <a href="<?php echo $author_url; ?>"><?php echo $author_name; ?></a> on <?php echo $post_date; ?> in 
-                                <?php
-                                    foreach($post_categories as $category){
-                                        echo '<a href="'.get_category_link($category->term_id).'">'.$category->name.' '.'</a>';
-                                    }
-                                ?>
-                                </span>
+                                <a class="metabox__blog-home-link" href="<?php echo get_post_type_archive_link('subject'); ?>"><i class="fa fa-home" aria-hidden="true"></i>All Subjects</a> 
+                                <span class="metabox__main"><?php the_title();?></span>
                             <?php }
                         ?>
                     </p>

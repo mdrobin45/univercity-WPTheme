@@ -81,7 +81,7 @@ add_filter('excerpt_length', 'modify_event_excerpt_length');
 *
 **/
 function custom_post_types(){
-    $labels = array(
+    $labels_event = array(
         'name' => __('Events','textdomain'),
         'singular_name' => __('Event','textdomain'),
         'menu_name' => __('Events','textdomain'),
@@ -95,24 +95,59 @@ function custom_post_types(){
         'not_found_in_trash' => __('Events not found','textdomain')
     );
 
-    $supports = array(
+    $supports_event = array(
         'title', 
         'editor',
         'thumbnail'
     );
-    $rewrite = array(
+    $rewrite_event = array(
         'slug' => 'events'
     );
 
     register_post_type('event',
         array(
-            'labels' => $labels,
+            'labels' => $labels_event,
             'public' => true,
             'show_in_rest' => true,
             'has_archive' => true,
             'menu_position'=> 4,
-            'supports' => $supports,
-            'rewrite' => $rewrite
+            'supports' => $supports_event,
+            'rewrite' => $rewrite_event
+        )
+    );
+
+    
+    // Subject post type
+    $labels_subject = array(
+        'name' => __('Subjects','textdomain'),
+        'singular_name' => __('Subject','textdomain'),
+        'menu_name' => __('Subjects','textdomain'),
+        'all_items' => __('All Subjects','textdomain'),
+        'add_new' => __('Add new','textdomain'),
+        'add_new_item' => __('Add new subject','textdomain'),
+        'edit_item' => __('Edit Subject','textdomain'),
+        'view_item' => __('View Subject','textdomain'),
+        'search_items' => __('Search Subjects','textdomain'),
+        'not_found' => __('Subjects not found','textdomain'),
+        'not_found_in_trash' => __('Subjects not found','textdomain')
+    );
+    $supports_subject = array(
+        'title', 
+        'editor',
+        'thumbnail'
+    );
+    $rewrite_subject = array(
+        'slug' => 'subjects'
+    );
+    register_post_type('subject',
+        array(
+            'labels' => $labels_subject,
+            'public' => true,
+            'show_in_rest' => true,
+            'has_archive' => true,
+            'menu_position'=> 4,
+            'supports' => $supports_subject,
+            'rewrite' => $rewrite_subject
         )
     );
 }

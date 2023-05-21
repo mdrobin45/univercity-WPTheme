@@ -26,19 +26,26 @@
 
                             if(is_single()){ ?>
                                 <a class="metabox__blog-home-link" href="<?php echo $archive_link; ?>"><i class="fa fa-home" aria-hidden="true"></i>All Events</a> 
-                                <span class="metabox__main">Posted By <a href="<?php echo $author_url; ?>"><?php echo $author_name; ?></a> on <?php echo $post_date; ?> in 
-                                <?php
-                                    foreach($post_categories as $category){
-                                        echo '<a href="'.get_category_link($category->term_id).'">'.$category->name.' '.'</a>';
-                                    }
-                                ?>
-                                </span>
+                                <span class="metabox__main"><?php the_title();?></span>
                             <?php }
                         ?>
                     </p>
                 </div>
                 <div class="generic-content">
                     <?php the_content();?>
+                    <?php
+                    $relational_subject = get_field('relational_subject');
+                    if($relational_subject){
+                        echo "<hr class='section-break'>";
+                    echo "<h2 class='headline headline--medium'>Relational Subject(s)<h2>";
+                    echo "<ul class='link-list min-list'>";
+                    foreach($relational_subject as $subject){?>
+                        <li><a href="<?php the_permalink($subject); ?>"><?php echo get_the_title($subject)?></a></li>
+                    <?php }
+                    echo "</ul>";
+                    }
+                    
+                    ?>
                 </div>
             </div>
         <?php }

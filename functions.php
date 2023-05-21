@@ -158,12 +158,11 @@ add_action('init', 'custom_post_types');
 * Adjust custom query
 *
 **/
-// function education_adjust_query($query){
-//     if(!is_admin() && is_post_type_archive('event') && $query->is_main_query){
-//         $query -> set('meta_key', 'select_event_date');
-//         $query -> set('orderby', 'meta_value_num');
-//         $query -> set('order', 'ASC');
-//     }
-// }
-// add_action('pre_get_posts', 'education_adjust_query');
-
+function education_adjust_query($query){
+    if(!is_admin() && is_post_type_archive('subject') && is_main_query()){
+        $query -> set('orderby', 'title');
+        $query -> set('order', 'ASC');
+        $query -> set('posts_per_page', -1);
+    }
+}
+add_action('pre_get_posts', 'education_adjust_query');

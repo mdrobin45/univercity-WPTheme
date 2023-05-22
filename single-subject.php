@@ -34,6 +34,36 @@
                     <?php the_content();?>
                     <?php
                         // Custom query for event post type
+                        $args = array(
+                            'posts_per_page' => -1,
+                            'post_type' => 'professor',
+                            'orderby' => 'title',
+                            'order' => 'ASC',
+                            'meta_query' => array(
+                                array(
+                                    'key' => "relational_subject",
+                                    'compare' => "LIKE",
+                                    'value' => '"'.get_the_ID().'"'
+                                )
+                            )
+                        );
+                        $professor_custom_query = new WP_Query($args);
+                        if($professor_custom_query->have_posts()){
+                            echo "<hr class='section-break'>";
+                            echo '<h2>'. get_the_title(). ' Professors</h2>';
+                            // Event html structure
+                            if($professor_custom_query -> have_posts()){
+                                while($professor_custom_query -> have_posts()){
+                                    $professor_custom_query -> the_post(); ?>
+                                    <li><a href="<?php the_permalink();?>"><?php the_title();?></a></li>
+                            <?php }
+                            }
+                        }
+                        ?>
+                        
+                    <?php
+                    wp_reset_postdata();
+                        // Custom query for event post type
                         $today = date('Ymd');
                         $args = array(
                             'posts_per_page' => -1,

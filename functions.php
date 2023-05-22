@@ -150,6 +150,40 @@ function custom_post_types(){
             'rewrite' => $rewrite_subject
         )
     );
+
+    // Professor post type
+    $labels_subject = array(
+        'name' => __('Professor','textdomain'),
+        'singular_name' => __('Professor','textdomain'),
+        'menu_name' => __('Professors','textdomain'),
+        'all_items' => __('All Professors','textdomain'),
+        'add_new' => __('Add new','textdomain'),
+        'add_new_item' => __('Add new professor','textdomain'),
+        'edit_item' => __('Edit Professor','textdomain'),
+        'view_item' => __('View Professor','textdomain'),
+        'search_items' => __('Search Professors','textdomain'),
+        'not_found' => __('Professors not found','textdomain'),
+        'not_found_in_trash' => __('Professors not found','textdomain')
+    );
+    $supports_subject = array(
+        'title', 
+        'editor',
+        'thumbnail'
+    );
+    $rewrite_subject = array(
+        'slug' => 'professors'
+    );
+    register_post_type('professor',
+        array(
+            'labels' => $labels_subject,
+            'public' => true,
+            'show_in_rest' => true,
+            'has_archive' => true,
+            'menu_position'=> 4,
+            'supports' => $supports_subject,
+            'rewrite' => $rewrite_subject
+        )
+    );
 }
 add_action('init', 'custom_post_types');
 
